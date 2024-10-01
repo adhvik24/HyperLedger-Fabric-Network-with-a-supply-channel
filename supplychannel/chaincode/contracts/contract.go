@@ -18,9 +18,9 @@ type SmartContract struct {
 type Asset struct {
 	// AppraisedValue int    `json:"AppraisedValue"`
 	// Color          string `json:"Color"`
-	ID             string `json:"ID"`
 	// Owner          string `json:"Owner"`
 	// Size           int    `json:"Size"`
+	ID             string `json:"ID"`
 	Description	    string `json:"Description"`
 	Status          string  `json:"Status"`
 }
@@ -28,9 +28,9 @@ type Asset struct {
 // InitLedger adds a base set of assets to the ledger
 func (s *SmartContract) InitLedger2(ctx contractapi.TransactionContextInterface) error {
 	assets := []Asset{
-		{ID: "asset1", Description :"iPhone 16", Status : "Ordered" },
-		{ID: "asset2", Description: "iPhone 15 Pro",   Status : "Shipped"},
-		{ID: "asset3", Description: "iPhone 15", Status : "Delivered"},
+		{ID: "asset1", Description :"Samsung S24 Ultra", Status : "Ordered" },
+		{ID: "asset2", Description: "Samsung S23 Ultra",   Status : "Shipped"},
+		{ID: "asset3", Description: "Samsung S23", Status : "Delivered"},
 		// {ID: "asset4", Color: "yellow", Size: 10, Owner: "Max", AppraisedValue: 600},
 		// {ID: "asset5", Color: "black", Size: 15, Owner: "Adriana", AppraisedValue: 700},
 		// {ID: "asset6", Color: "white", Size: 15, Owner: "Michel", AppraisedValue: 800},
