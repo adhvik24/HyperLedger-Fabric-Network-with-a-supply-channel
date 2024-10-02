@@ -91,7 +91,8 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 source ./scripts/setOrgPeerContext.sh 1
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n products $PEER_CONN_PARAMS -c '{"function":"CreateAsset","Args":["mobile1","GooglePixel", "PreOrder"]}'
 peer chaincode query -C $CHANNEL_NAME -n products -c '{"Args":["GetAllAssets"]}'
-```
+
 
 source ./scripts/setOrgPeerContext.sh 2
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C $CHANNEL_NAME -n products $PEER_CONN_PARAMS -c '{"function":"UpdateAsset","Args":["mobile1", "OrderPlaced"]}'
+```
