@@ -1,4 +1,6 @@
-# Setting up network and Certificates
+# HLF Network with two organizations (Supply Channel)
+
+## Setting up network and Certificates
 ```bash
 export PATH=${PWD}/../bin:${PWD}:$PATH
 cryptogen generate --config=./organizations/cryptogen/crypto-config-org4.yaml --output="organizations"
@@ -8,7 +10,7 @@ export DOCKER_SOCK=/var/run/docker.sock
 IMAGE_TAG=latest docker-compose -f compose/compose-test-net.yaml -f compose/docker/docker-compose-test-net.yaml up
 ```
 
-# Creating channel and genesis blocks
+## Creating channel and genesis blocks
 ```bash
 export PATH=${PWD}/../bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}/configtx
@@ -25,7 +27,7 @@ export ORDERER_ADMIN_TLS_PRIVATE_KEY=${PWD}/organizations/ordererOrganizations/e
 osnadmin channel join --channelID $CHANNEL_NAME --config-block ./channel-artifacts/${CHANNEL_NAME}.block -o localhost:7053 --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"
 ```
 
-# Joining peers to channels
+## Joining peers to channels
 ```bash
 source ./scripts/setOrgPeerContext.sh 1
 peer channel join -b ./channel-artifacts/supplychannel.block
@@ -34,7 +36,7 @@ source ./scripts/setOrgPeerContext.sh 2
 peer channel join -b ./channel-artifacts/supplychannel.block
 ```
 
-# Setting anchor peer
+## Setting anchor peer
 ```bash
 source ./scripts/setOrgPeerContext.sh 1
 docker exec cli ./scripts/setAnchorPeer.sh 1 $CHANNEL_NAME
@@ -42,7 +44,7 @@ source ./scripts/setOrgPeerContext.sh 2
 docker exec cli ./scripts/setAnchorPeer.sh 2 $CHANNEL_NAME
 ```
 
-# Install and Instantiate Chaincode
+## Install and Instantiate Chaincode
 ```bash
 source ./scripts/setFabCarGolangContext.sh
 export FABRIC_CFG_PATH=$PWD/../config/
@@ -82,7 +84,7 @@ peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride o
 peer lifecycle chaincode querycommitted --channelID $CHANNEL_NAME --name products
 ```
 
-# Invoke and querying the chaincode
+## Invoke and querying the chaincode
 ```bash
 source ./scripts/setPeerConnectionParam.sh 1 2
 source ./scripts/setOrgPeerContext.sh 1
